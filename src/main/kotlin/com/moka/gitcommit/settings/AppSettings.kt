@@ -17,7 +17,8 @@ class AppSettings : PersistentStateComponent<AppSettings.State> {
         var promptTemplate: String = "",
         var maxDiffLength: Int = 12_000,
         var openAiBaseUrl: String = "https://api.openai.com/v1/chat/completions",
-        var ignorePatterns: String = DEFAULT_IGNORE_PATTERNS
+        var ignorePatterns: String = DEFAULT_IGNORE_PATTERNS,
+        var lastPrompt: String = ""
     )
 
     private var _state = State()
