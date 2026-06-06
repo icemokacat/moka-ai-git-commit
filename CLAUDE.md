@@ -7,6 +7,21 @@ The plugin is a thin connector: it extracts the git diff, feeds it into a user-w
 prompt template, calls OpenAI, and inserts the response into the commit message field.
 The user owns the prompt entirely — the plugin provides no built-in prompt logic.
 
+## Development Environment
+
+> **Rule for Claude:** Shell syntax depends on the user's OS. Before running any command (Gradle, git, installs, file ops), confirm the user's environment if it is not already known.
+
+**Ask at the start of a session when the OS is unclear:**
+> "어떤 OS/쉘 환경에서 작업하고 계신가요? (Windows PowerShell / macOS‧Linux bash)"
+
+| OS | Gradle | Env var | Path separator |
+|---|---|---|---|
+| Windows (PowerShell) | `.\gradlew` | `$env:VAR="x"; .\gradlew ...` | `\` |
+| macOS / Linux (bash/zsh) | `./gradlew` | `VAR=x ./gradlew ...` | `/` |
+| Docker container interior | `./gradlew` | `export VAR=x` | `/` |
+
+Once confirmed, use that syntax consistently for the rest of the session.
+
 ## Tech Stack
 
 | Layer | Choice |
@@ -50,12 +65,16 @@ gradle.properties
 
 ## Build Commands
 
-```bash
-./gradlew runIde          # Run plugin in a test IDE instance
-./gradlew buildPlugin     # Build distributable ZIP -> build/distributions/
-./gradlew test            # Run unit tests
-./gradlew verifyPlugin    # Validate plugin.xml and binary compatibility
-./gradlew publishPlugin   # Publish to JetBrains Marketplace (needs token)
+> Windows PowerShell — use `.\gradlew` (backslash). Never use `./gradlew` on the host.
+
+```powershell
+.\gradlew runIde          # Run plugin in a test IDE instance
+.\gradlew buildPlugin     # Build distributable ZIP -> build/distributions/
+.\gradlew test            # Run unit tests
+.\gradlew verifyPlugin    # Validate plugin.xml and binary compatibility
+
+# Publish to JetBrains Marketplace (PowerShell env var syntax)
+$env:PUBLISH_TOKEN="your_token"; .\gradlew publishPlugin
 ```
 
 ## Hard Rules (never violate)

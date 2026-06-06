@@ -1,6 +1,6 @@
 # skill: getting-started
 
-## When to Use
+## 언제 사용하나
 
 프로젝트를 처음 클론하거나 새로 셋업할 때. 첫 코드 작성 전 이 순서대로 진행.
 
@@ -145,8 +145,11 @@ class GenerateCommitMessageAction : AnAction() {
 
 ### 6. 테스트 실행
 
-```bash
-./gradlew runIde
+> OS에 따라 `.\gradlew` (Windows) 또는 `./gradlew` (macOS/Linux) 사용.
+
+```
+.\gradlew runIde         # Windows
+./gradlew runIde         # macOS / Linux
 # 테스트 IntelliJ 인스턴스 열림
 # File -> New Project -> git init
 # 파일 변경 후 커밋창 (Ctrl+K) 열어서 버튼 확인

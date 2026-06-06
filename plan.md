@@ -496,15 +496,18 @@ gradle.properties
 
 ## 검증 방법
 
-```bash
+```
+# Windows:    .\gradlew build
+# macOS/Linux: ./gradlew build
+
 # 1. 컴파일
-./gradlew build
+# .\gradlew build  /  ./gradlew build
 
 # 2. plugin.xml 유효성
-./gradlew verifyPlugin
+# .\gradlew verifyPlugin  /  ./gradlew verifyPlugin
 
 # 3. 실제 동작 확인
-./gradlew runIde
+# .\gradlew runIde  /  ./gradlew runIde
 # -> 테스트 IDE 열림
 # -> 아무 프로젝트에서 파일 수정 -> git stage -> Ctrl+K
 # -> Settings -> Tools -> Moka Git AI Commit 에서 API 키 + 프롬프트 설정

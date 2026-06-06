@@ -64,15 +64,20 @@ class MyNewAction : AnAction() {
 
 ## 테스트 방법
 
-```bash
+> OS에 따라 명령어 형식이 다릅니다. Windows는 `.\gradlew`, macOS/Linux는 `./gradlew`.
+
+```
 # 1. 컴파일 확인
-./gradlew build
+.\gradlew build          # Windows
+./gradlew build          # macOS / Linux
 
 # 2. 테스트 실행
-./gradlew test
+.\gradlew test           # Windows
+./gradlew test           # macOS / Linux
 
 # 3. 실제 IDE에서 동작 확인
-./gradlew runIde
+.\gradlew runIde         # Windows
+./gradlew runIde         # macOS / Linux
 # -> IntelliJ 테스트 인스턴스 열림
 # -> 임시 프로젝트에서 git 변경사항 만들고 커밋창 열어서 확인
 ```
