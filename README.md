@@ -4,8 +4,11 @@
 
 OpenAI API를 사용해 git 커밋 메시지를 자동으로 생성하는 IntelliJ IDEA 플러그인.
 
-스테이징된 변경사항을 읽어 직접 작성한 프롬프트와 결합한 뒤 커밋 메시지 필드를 채워줌 —
+스테이징된 변경사항을 읽어 직접 작성한 프롬프트와 결합한 뒤 커밋 메시지 필드를 채워줌
+
 내장 프롬프트나 기본값 없음, 프롬프트는 온전히 사용자 몫.
+
+플러그인은 단순히 연결 역할만 수행 합니다.
 
 ---
 
@@ -52,12 +55,12 @@ Settings → Tools → **Moka Git AI Commit** 에서 3개 탭을 설정합니다
 
 #### API Settings 탭
 
-| 항목 | 설명 |
-|---|---|
-| OpenAI API Key | `sk-...` 형식의 OpenAI API 키. 시스템 키체인에 저장됨 (plain text 아님). |
-| Model | 사용할 모델. 직접 입력도 가능. 기본값: `gpt-4o` |
+| 항목 | 설명                                                                     |
+|---|------------------------------------------------------------------------|
+| OpenAI API Key | `sk-...` 형식의 OpenAI API 키. 시스템 키체인에 저장됨 (plain text 아님).               |
+| Model | 사용할 모델. 직접 입력도 가능. 기본값: `gpt-4o-mini`                                  |
 | API URL | 요청을 보낼 전체 엔드포인트 URL. 기본값: `https://api.openai.com/v1/chat/completions` |
-| Test Connection | API 키와 URL이 유효한지 즉시 검증. |
+| Test Connection | API 키와 URL이 유효한지 즉시 검증.                                                |
 
 API 키가 없으면 설정창 하단 링크에서 [platform.openai.com](https://platform.openai.com/api-keys) 에서 발급.
 

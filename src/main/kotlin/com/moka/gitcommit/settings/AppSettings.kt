@@ -13,7 +13,7 @@ import com.intellij.openapi.components.*
 class AppSettings : PersistentStateComponent<AppSettings.State> {
 
     data class State(
-        var openAiModel: String = "gpt-4o",
+        var openAiModel: String = "gpt-4o-mini",
         var promptTemplate: String = "",
         var maxDiffLength: Int = 12_000,
         var openAiBaseUrl: String = "https://api.openai.com/v1/chat/completions",

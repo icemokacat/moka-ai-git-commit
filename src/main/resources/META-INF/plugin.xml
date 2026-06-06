@@ -5,9 +5,61 @@
   <vendor email="icemokacat@gmail.com" url="https://github.com/icemokacat">icemokacat</vendor>
 
   <description><![CDATA[
-    Generate git commit messages using OpenAI API.<br/>
-    You write the prompt — the plugin connects your changes to the AI.
-  ]]></description>
+<h2>Moka Git AI Commit</h2>
+
+<p>
+Generate Git commit messages from staged changes using OpenAI-compatible AI models.
+</p>
+
+<h3>Getting Started</h3>
+
+<ol>
+  <li>
+    <strong>Configure the OpenAI settings</strong><br/>
+    Open <code>Settings</code> and search for <code>Moka Git AI Commit</code>.
+    <ul>
+      <li>Enter your API URL and API Key.</li>
+      <li>Select a model. <code>gpt-4o-mini</code> is the default and recommended option.</li>
+      <li>Click <code>Test Connection</code> to verify your configuration.</li>
+    </ul>
+  </li>
+
+  <li>
+    <strong>Create your prompt</strong><br/>
+    Open the <code>Prompt</code> tab and write instructions for the AI.
+    <br/><br/>
+    Sample prompts are available here:
+    <br/>
+    <a href="https://github.com/icemokacat/moka-ai-git-commit/blob/main/sample-prompt/sample-prompt.md">
+      Sample Prompt Examples
+    </a>
+  </li>
+
+  <li>
+    <strong>Generate a commit message</strong><br/>
+    Open the Commit window using:
+    <br/>
+    <code>Ctrl + K</code> (Windows/Linux default IntelliJ shortcut)
+    <br/><br/>
+    Then generate a commit message by:
+    <ul>
+      <li>Clicking the plugin button in the Commit window.</li>
+      <li>Using the plugin shortcut: <code>Ctrl + Alt + C</code>.</li>
+    </ul>
+  </li>
+</ol>
+
+<h3>Features</h3>
+
+<ul>
+  <li>Generate commit messages from Git diffs using OpenAI.</li>
+  <li>Fully customizable prompts.</li>
+  <li>Support for custom API URLs and OpenAI-compatible providers.</li>
+  <li>Model selection support.</li>
+  <li>Built-in connection testing.</li>
+</ul>
+
+]]></description>
 
   <change-notes><![CDATA[
     <b>1.0.0</b> Initial release.

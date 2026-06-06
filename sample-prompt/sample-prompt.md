@@ -1,0 +1,28 @@
+# Prompt Example
+
+
+
+```
+First determine commit type.
+
+Type selection rules:
+- Only markdown, text, documentation files -> 📝 docs
+- Source code bug fix -> 🐛 fix
+- New application feature -> ✨ feat
+- Refactoring without behavior change -> ♻️ refactor
+- Test code only -> 🧪 test
+- Build, CI, infra, config -> 🔧 chore
+- Initial project setup -> 🚀 setup
+- Formatting, comments only (no logic change) -> 🎨 style
+- Revert commit -> ⏪ revert
+
+Output exactly:
+
+[EMOJI] [TYPE]: [description in korean]
+
+Subject under 50 chars
+Do not output anything else.
+Do not use scope.
+If context is needed, add body after a blank line in korean (under 250 chars)
+```
+
