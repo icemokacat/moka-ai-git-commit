@@ -85,13 +85,23 @@ $env:PUBLISH_TOKEN="your_token"; .\gradlew publishPlugin
 4. **Diff size cap** — truncate input at 12 000 chars before sending to OpenAI. Configurable up to 50 000.
 5. **`exit 0` on non-critical errors** — plugin must never crash the IDE.
 
-## Settings Stored
+## Settings UI (AppSettingsConfigurable)
 
-- `openAiApiKey` — stored via `PasswordSafe` (system keychain), not plain XML
-- `openAiModel` — string, default `gpt-4o`
-- `promptTemplate` — multiline string, entirely user-controlled
-- `maxDiffLength` — int, default 12000
-- `openAiBaseUrl` — string, default `https://api.openai.com/v1` (allows custom endpoints)
+Settings → Tools → Moka Git AI Commit 에서 제공하는 기능. UI 명세는 변경 시 이 표를 기준으로 유지할 것.
+
+| 설정 키 | UI 컨트롤 | 저장 위치 | 기본값 |
+|---|---|---|---|
+| `openAiApiKey` | `JBPasswordField` (마스킹 입력) | `PasswordSafe` (시스템 키체인) | — |
+| `openAiModel` | `ComboBox` (프리셋 + 직접 입력) | `AppSettings.State` XML | `gpt-4o` |
+| `openAiBaseUrl` | `JBTextField` | `AppSettings.State` XML | `https://api.openai.com/v1` |
+| `maxDiffLength` | `JBTextField` (숫자) | `AppSettings.State` XML | `12000` |
+| `promptTemplate` | `JBTextArea` (멀티라인) + `JBScrollPane` | `AppSettings.State` XML | — |
+
+**UI 요구사항 (절대 위반 금지):**
+- `promptTemplate` 필드는 단일 줄 입력 금지 — 최소 10행, 스크롤 가능, 자동 줄바꿈(`lineWrap=true`, `wrapStyleWord=true`) 적용
+- `openAiBaseUrl`은 반드시 사용자가 편집 가능해야 함 — 하드코딩 금지 (Azure OpenAI, Ollama 등 커스텀 엔드포인트 지원)
+- `openAiApiKey`는 반드시 `PasswordSafe`에 저장 — `AppSettings.State` XML에 평문 기록 절대 금지
+- `openAiModel` 기본 프리셋: `gpt-4o`, `gpt-4o-mini`, `gpt-4-turbo`, `gpt-3.5-turbo`
 
 ## Extension Points Registered
 
