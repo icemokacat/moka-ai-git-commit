@@ -1,0 +1,45 @@
+<idea-plugin>
+  <id>com.moka.gitcommit</id>
+  <name>Moka Git AI Commit</name>
+  <version>1.0.0</version>
+  <vendor email="icemokacat@gmail.com" url="https://github.com/icemokacat">icemokacat</vendor>
+
+  <description><![CDATA[
+    Generate git commit messages using OpenAI API.<br/>
+    You write the prompt — the plugin connects your changes to the AI.
+  ]]></description>
+
+  <change-notes><![CDATA[
+    <b>1.0.0</b> Initial release.
+  ]]></change-notes>
+
+  <depends>com.intellij.modules.platform</depends>
+  <depends>Git4Idea</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <applicationService
+        serviceImplementation="com.moka.gitcommit.settings.AppSettings"/>
+
+    <applicationConfigurable
+        parentId="tools"
+        instance="com.moka.gitcommit.settings.AppSettingsConfigurable"
+        id="com.moka.gitcommit.settings"
+        displayName="Moka Git AI Commit"/>
+
+    <notificationGroup
+        id="com.moka.gitcommit"
+        displayType="BALLOON"/>
+  </extensions>
+
+  <actions>
+    <action
+        id="com.moka.gitcommit.GenerateCommitMessage"
+        class="com.moka.gitcommit.actions.GenerateCommitMessageAction"
+        text="Generate AI Commit Message"
+        description="Generate commit message using OpenAI API"
+        icon="/icons/generateCommitMessage.png">
+      <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt C"/>
+      <add-to-group group-id="Vcs.MessageActionGroup" anchor="first"/>
+    </action>
+  </actions>
+</idea-plugin>
