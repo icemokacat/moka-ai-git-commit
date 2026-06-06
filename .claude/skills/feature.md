@@ -19,6 +19,18 @@
 
 ### 2. 설정값 추가할 때
 
+현재 제공되는 설정 항목과 각 UI 컨트롤:
+
+| 설정 | UI 컨트롤 | 비고 |
+|---|---|---|
+| API Key | `JBPasswordField` | `PasswordSafe` 저장, XML 평문 금지 |
+| Model | `ComboBox` | 프리셋: `gpt-4o`, `gpt-4o-mini`, `gpt-4-turbo`, `gpt-3.5-turbo` |
+| Base URL | `JBTextField` | 커스텀 엔드포인트 지원용, 하드코딩 금지 |
+| Prompt template | `JBTextArea(10, 60)` + `JBScrollPane` | 멀티라인 필수, 단일 줄 입력 금지 |
+| Max diff length | `JBTextField` | 숫자 입력 |
+
+새 설정을 추가할 때:
+
 ```kotlin
 // 1. AppSettings.State에 필드 추가
 data class State(
@@ -28,6 +40,9 @@ data class State(
 // 2. AppSettingsConfigurable에 UI 컴포넌트 추가
 // 3. isModified(), apply(), reset() 세 메서드 모두 업데이트
 ```
+
+> **Prompt 에디터 주의:** `promptTemplate` 필드는 반드시 `JBTextArea` + `JBScrollPane` 조합 사용.
+> `JBTextField` (단일 줄) 또는 일반 `TextArea`로 교체 금지.
 
 ### 3. 새 AnAction 추가할 때
 
@@ -64,15 +79,20 @@ class MyNewAction : AnAction() {
 
 ## 테스트 방법
 
-```bash
+> OS에 따라 명령어 형식이 다릅니다. Windows는 `.\gradlew`, macOS/Linux는 `./gradlew`.
+
+```
 # 1. 컴파일 확인
-./gradlew build
+.\gradlew build          # Windows
+./gradlew build          # macOS / Linux
 
 # 2. 테스트 실행
-./gradlew test
+.\gradlew test           # Windows
+./gradlew test           # macOS / Linux
 
 # 3. 실제 IDE에서 동작 확인
-./gradlew runIde
+.\gradlew runIde         # Windows
+./gradlew runIde         # macOS / Linux
 # -> IntelliJ 테스트 인스턴스 열림
 # -> 임시 프로젝트에서 git 변경사항 만들고 커밋창 열어서 확인
 ```
