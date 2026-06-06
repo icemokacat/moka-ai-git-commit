@@ -130,6 +130,17 @@ cd moka-git-ai-commit
 ./gradlew compileKotlin
 ```
 
+**`verifyPlugin` 검증 대상 버전**
+
+`gradle.properties`의 `verifyIdeVersions` 프로퍼티로 검증할 IDE 버전을 지정합니다.
+
+```properties
+# 형식: TYPE-VERSION (쉼표 구분) / IC=Community, IU=Ultimate
+verifyIdeVersions=IC-2024.2,IC-2024.3
+```
+
+첫 실행 시 지정된 IDE 버전을 다운로드합니다 (버전당 약 300~600 MB). 이후 실행은 캐시되어 빠릅니다.
+
 ### runIde — 샌드박스 IDE에서 직접 테스트
 
 플러그인이 설치된 별도의 IntelliJ IDEA 인스턴스를 실행합니다.

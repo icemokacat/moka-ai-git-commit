@@ -111,6 +111,91 @@ settings.gradle.kts
 
 ---
 
+## verifyPlugin 설정 플랜
+
+### 문제
+
+`.\gradlew verifyPlugin` 실행 시 아래 오류 발생:
+
+```
+No IDE resolved for verification with the IntelliJ Plugin Verifier.
+```
+
+`build.gradle.kts`에 `intellijPlatform.pluginVerification.ides` 블록이 누락되어 있음.
+`pluginVerifier()` 의존성은 이미 추가되어 있지만, 어떤 IDE 버전을 대상으로 검증할지 지정이 없는 상태.
+
+### 선택지 비교
+
+| 방식 | 장점 | 단점 | 추천 상황 |
+|---|---|---|---|
+| A. `recommended()` | JetBrains 권장 버전 자동 선택, 유지보수 최소 | 빌드마다 여러 IDE 다운로드(~수 GB), 느림 | CI 전수 검증 단계 |
+| B. `gradle.properties` 버전 명시 | 버전 관리 명확, 재현 가능, 빠름 | 새 버전 출시 시 직접 업데이트 필요 | 로컬 개발 + 현 CI |
+| C. `local()` (로컬 설치 IDE) | 다운로드 없음 | 기기마다 경로 다름, CI 불가 | 개인 로컬 전용 |
+
+### 권장 방안: B (gradle.properties 기반 명시적 버전 관리)
+
+**이유**
+
+- 현재 `sinceBuild=242 ~ untilBuild=251.*` 범위이므로 최소·최대 양 끝(242, 최신 안정) 두 버전 검증이 실질적
+- 버전은 `gradle.properties`에서 관리 → 코드 변경 없이 검증 대상 추가·변경 가능
+- `recommended()` 는 IDE 3~5개를 다운로드해 로컬 첫 빌드 시간이 크게 증가; 명시적 버전은 1~2개로 제한 가능
+- 확장성: `verifyIdeVersions` 프로퍼티에 쉼표로 버전을 추가하는 것만으로 검증 대상 확장
+
+### 구체적 변경 내용
+
+**`gradle.properties`에 추가**
+
+```properties
+# 검증 대상 IDE 버전 (쉼표 구분, 형식: TYPE-VERSION)
+# IC=Community, IU=Ultimate
+# sinceBuild=242(2024.2) ~ untilBuild=251.*(2024.3)
+verifyIdeVersions=IC-2024.2,IC-2024.3
+```
+
+**`build.gradle.kts`의 `intellijPlatform {}` 블록에 추가**
+
+```kotlin
+pluginVerification {
+    ides {
+        providers.gradleProperty("verifyIdeVersions").get()
+            .split(",")
+            .map { it.trim() }
+            .forEach { spec ->
+                val dashIdx = spec.indexOf('-')
+                val typeCode = spec.substring(0, dashIdx)
+                val version  = spec.substring(dashIdx + 1)
+                ide(IntelliJPlatformType.fromCode(typeCode), version)
+            }
+    }
+}
+```
+
+> **주의**: `IntelliJPlatformType.fromCode()` 가 없으면 enum 직접 참조 방식으로 대체
+> (`IntelliJPlatformType.IntellijIdeaCommunity` 등) — 컴파일 시 확인 필요.
+
+**`repositories` 블록** — 현재 `defaultRepositories()` 가 이미 있으므로 변경 불필요.
+
+### 작업 순서
+
+1. `gradle.properties`에 `verifyIdeVersions` 프로퍼티 추가
+2. `build.gradle.kts`에 `pluginVerification` 블록 추가
+3. `.\gradlew verifyPlugin` 재실행 → 성공 확인
+4. (선택) CLAUDE.md의 Build Commands 섹션에 첫 실행 시 IDE 다운로드 발생 안내 추가
+
+### 미래 확장 (CI 전수 검증이 필요해질 때)
+
+`gradle.properties` 방식 대신 `recommended()` 전환:
+
+```kotlin
+pluginVerification {
+    ides { recommended() }
+}
+```
+
+이 경우 CI matrix build 분리 또는 Gradle 빌드 캐시 전략 필요.
+
+---
+
 ## 향후 개선 사항
 
 - [ ] 선택된 파일만 diff 추출 (현재는 전체 staged)

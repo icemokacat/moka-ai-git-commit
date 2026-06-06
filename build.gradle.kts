@@ -1,3 +1,5 @@
+import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
+
 plugins {
     id("java")
     kotlin("jvm") version "2.1.0"
@@ -59,4 +61,24 @@ intellijPlatform {
         }
     }
     publishing { token = providers.environmentVariable("PUBLISH_TOKEN") }
+
+    pluginVerification {
+        ides {
+            val typeMap = mapOf(
+                "IC" to IntelliJPlatformType.IntellijIdeaCommunity,
+                "IU" to IntelliJPlatformType.IntellijIdeaUltimate,
+            )
+            providers.gradleProperty("verifyIdeVersions").get()
+                .split(",")
+                .map { it.trim() }
+                .forEach { spec ->
+                    val dashIdx = spec.indexOf('-')
+                    val typeCode = spec.substring(0, dashIdx)
+                    val version  = spec.substring(dashIdx + 1)
+                    val type = typeMap[typeCode]
+                        ?: error("지원하지 않는 IDE 타입 코드: $typeCode (지원 목록: ${typeMap.keys})")
+                    ide(type, version)
+                }
+        }
+    }
 }
