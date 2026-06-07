@@ -49,6 +49,9 @@ tasks.test {
 
 kotlin { jvmToolchain(21) }
 
+tasks.withType<JavaCompile> { options.encoding = "UTF-8" }
+tasks.withType<ProcessResources> { filteringCharset = "UTF-8" }
+
 intellijPlatform {
     // JAR 변경 시 자동 hot-reload 비활성화 — PluginSet.withModule 내부 assertion 오류 방지
     autoReload = false

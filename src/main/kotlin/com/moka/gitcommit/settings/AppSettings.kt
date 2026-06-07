@@ -14,7 +14,7 @@ class AppSettings : PersistentStateComponent<AppSettings.State> {
 
     data class State(
         var openAiModel: String = "gpt-4o-mini",
-        var promptTemplate: String = "",
+        var promptTemplate: String = DEFAULT_PROMPT_TEMPLATE,
         var maxDiffLength: Int = 12_000,
         var openAiBaseUrl: String = "https://api.openai.com/v1/chat/completions",
         var ignorePatterns: String = DEFAULT_IGNORE_PATTERNS,
@@ -36,6 +36,15 @@ class AppSettings : PersistentStateComponent<AppSettings.State> {
 
     companion object {
         fun getInstance(): AppSettings = service()
+
+        val DEFAULT_PROMPT_TEMPLATE: String by lazy {
+            AppSettings::class.java
+                .getResourceAsStream("/prompts/default-prompt.txt")
+                ?.reader(Charsets.UTF_8)
+                ?.readText()
+                ?.trimEnd()
+                ?: ""
+        }
 
         val DEFAULT_IGNORE_PATTERNS = """
 # 빌드 결과물
