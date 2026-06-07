@@ -64,8 +64,9 @@ intellijPlatform {
         }
         ideaVersion {
             sinceBuild = providers.gradleProperty("pluginSinceBuild")
-            val until = providers.gradleProperty("pluginUntilBuild").orNull
-            if (!until.isNullOrBlank()) untilBuild = providers.gradleProperty("pluginUntilBuild")
+            untilBuild = providers.provider {
+                providers.gradleProperty("pluginUntilBuild").orNull?.takeIf { it.isNotBlank() }
+            }
         }
     }
     publishing { token = providers.environmentVariable("PUBLISH_TOKEN") }
