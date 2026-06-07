@@ -2,6 +2,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+[⚡Intelij Marketplace Link](https://plugins.jetbrains.com/plugin/32149-moka-git-ai-commit)
+
 OpenAI API를 사용해 git 커밋 메시지를 자동으로 생성하는 IntelliJ IDEA 플러그인.
 
 스테이징된 변경사항을 읽어 직접 작성한 프롬프트와 결합한 뒤 커밋 메시지 필드를 채워줌
