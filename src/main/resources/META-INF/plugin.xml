@@ -1,7 +1,6 @@
 <idea-plugin>
   <id>com.moka.gitcommit</id>
   <name>Moka Git AI Commit</name>
-  <version>1.0.0</version>
   <vendor email="icemokacat@gmail.com" url="https://github.com/icemokacat">icemokacat</vendor>
 
   <description><![CDATA[
@@ -60,10 +59,6 @@ Generate Git commit messages from staged changes using OpenAI-compatible AI mode
 </ul>
 
 ]]></description>
-
-  <change-notes><![CDATA[
-    <b>1.0.0</b> Initial release.
-  ]]></change-notes>
 
   <depends>com.intellij.modules.platform</depends>
   <depends>Git4Idea</depends>
