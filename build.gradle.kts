@@ -55,9 +55,14 @@ intellijPlatform {
     pluginConfiguration {
         name = providers.gradleProperty("pluginName")
         version = providers.gradleProperty("pluginVersion")
+        changeNotes = providers.gradleProperty("pluginVersion").map { v ->
+            providers.gradleProperty("pluginChangeNotes").orNull
+                ?: "<b>$v</b>"
+        }
         ideaVersion {
             sinceBuild = providers.gradleProperty("pluginSinceBuild")
-            untilBuild = providers.gradleProperty("pluginUntilBuild")
+            val until = providers.gradleProperty("pluginUntilBuild").orNull
+            if (!until.isNullOrBlank()) untilBuild = providers.gradleProperty("pluginUntilBuild")
         }
     }
     publishing { token = providers.environmentVariable("PUBLISH_TOKEN") }
