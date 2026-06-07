@@ -45,8 +45,9 @@ class GenerateCommitMessageAction : AnAction() {
             notify(project, "Commit workflow handler not found. This action must be triggered from the commit dialog.", NotificationType.ERROR)
             return
         }
-        if(commitMessage == null) {
+        if (commitMessage == null) {
             notify(project, "Commit message not found.", NotificationType.ERROR)
+            return
         }
 
         val includedChanges = commitWorkflowHandler.ui.getIncludedChanges()
@@ -72,7 +73,13 @@ class GenerateCommitMessageAction : AnAction() {
 
         object : Task.Backgroundable(project, "Generating commit message...", true) {
             override fun run(indicator: ProgressIndicator) {
-                val diff = DiffExtractor.extractFromWorkflow(includedChanges, includedUnversionedFiles, project.basePath)
+                val diff = DiffExtractor.extractFromWorkflow(
+                    includedChanges,
+                    includedUnversionedFiles,
+                    project.basePath,
+                    settings.state.ignorePatterns,
+                    settings.state.maxDiffLength
+                )
                 val prompt = promptTemplate + "\n\n" + diff
                 settings.state.lastPrompt = prompt
 
@@ -105,9 +112,8 @@ class GenerateCommitMessageAction : AnAction() {
         }.queue()
     }
 
-    private fun getCommitMessage(e: AnActionEvent): CommitMessage? {
-        return e.getData<CommitMessageI?>(VcsDataKeys.COMMIT_MESSAGE_CONTROL) as CommitMessage?
-    }
+    private fun getCommitMessage(e: AnActionEvent): CommitMessage? =
+        e.getData(VcsDataKeys.COMMIT_MESSAGE_CONTROL) as? CommitMessage
 
     private fun notify(project: Project, content: String, type: NotificationType) {
         NotificationGroupManager.getInstance()
