@@ -34,7 +34,7 @@ OpenAI API를 사용해 git 커밋 메시지를 자동으로 생성하는 Intell
 
 ### 요구사항
 
-- IntelliJ IDEA 2024.2 이상 (Community 또는 Ultimate)
+- IntelliJ IDEA 2024.3 이상 (Community 또는 Ultimate)
 - OpenAI API 키 (또는 호환 엔드포인트)
 
 ### 설치
@@ -107,8 +107,8 @@ diff에서 제외할 파일 패턴을 glob 형식으로 지정합니다 (`.gitig
 | JDK | 21 이상 |
 | Kotlin | 2.1.0 |
 | Gradle | 9.5.0 (래퍼 사용, 별도 설치 불필요) |
-| IntelliJ Platform | 2024.2 (IC-242) |
-| 대상 IDE | IntelliJ IDEA 2024.2+ |
+| IntelliJ Platform | 2024.3 (IC-243) |
+| 대상 IDE | IntelliJ IDEA 2024.3+ |
 
 ```powershell
 # 저장소 클론
@@ -138,7 +138,7 @@ cd moka-git-ai-commit
 
 ```properties
 # 형식: TYPE-VERSION (쉼표 구분) / IC=Community, IU=Ultimate
-verifyIdeVersions=IC-2024.2,IC-2024.3
+verifyIdeVersions=IC-2024.3,IU-2026.1
 ```
 
 첫 실행 시 지정된 IDE 버전을 다운로드합니다 (버전당 약 300~600 MB). 이후 실행은 캐시되어 빠릅니다.
