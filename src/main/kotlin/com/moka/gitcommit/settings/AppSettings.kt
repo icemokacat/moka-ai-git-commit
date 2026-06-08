@@ -31,7 +31,8 @@ class AppSettings : PersistentStateComponent<AppSettings.State> {
         set(value) = PasswordSafe.instance.setPassword(credentialAttributes(), value)
 
     private fun credentialAttributes() = CredentialAttributes(
-        generateServiceName("MokaGitAICommit", "openai-api-key")
+        serviceName = generateServiceName("MokaGitAICommit", "openai-api-key"),
+        userName = "mokacat"
     )
 
     companion object {
