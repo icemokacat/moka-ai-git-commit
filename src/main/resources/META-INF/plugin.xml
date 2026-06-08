@@ -1,7 +1,7 @@
 <idea-plugin>
   <id>com.moka.gitcommit</id>
   <name>Moka Git AI Commit</name>
-  <vendor email="icemokacat@gmail.com" url="https://github.com/icemokacat">icemokacat</vendor>
+  <vendor url="https://github.com/icemokacat">mokacat</vendor>
 
   <description><![CDATA[
 <h2>Moka Git AI Commit</h2>
