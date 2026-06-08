@@ -2,6 +2,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+[⚡Intelij Marketplace Link](https://plugins.jetbrains.com/plugin/32149-moka-git-ai-commit)
+
 OpenAI API를 사용해 git 커밋 메시지를 자동으로 생성하는 IntelliJ IDEA 플러그인.
 
 스테이징된 변경사항을 읽어 직접 작성한 프롬프트와 결합한 뒤 커밋 메시지 필드를 채워줌
@@ -22,7 +24,7 @@ OpenAI API를 사용해 git 커밋 메시지를 자동으로 생성하는 Intell
 - [개발자 가이드](#개발자-가이드)
   - [개발 환경](#개발-환경)
   - [빌드](#빌드)
-  - [runIde — 샌드박스 IDE에서 직접 테스트](#runidle--샌드박스-ide에서-직접-테스트)
+  - [runIde 샌드박스 IDE에서 직접 테스트](#runide--샌드박스-ide에서-직접-테스트)
   - [테스트](#테스트)
   - [빌드 오류 안내](#빌드-오류-안내)
 
@@ -45,7 +47,7 @@ OpenAI API를 사용해 git 커밋 메시지를 자동으로 생성하는 Intell
 
 **ZIP 직접 설치**
 
-1. [Releases](https://github.com/icemokacat/moka-git-ai-commit/releases)에서 최신 ZIP 다운로드
+1. [Releases](https://github.com/icemokacat/moka-ai-git-commit/releases)에서 최신 ZIP 다운로드
 2. Settings → Plugins → ⚙ → Install Plugin from Disk
 3. ZIP 선택 → IDE 재시작
 
@@ -104,7 +106,7 @@ diff에서 제외할 파일 패턴을 glob 형식으로 지정합니다 (`.gitig
 |---|---|
 | JDK | 21 이상 |
 | Kotlin | 2.1.0 |
-| Gradle | 9.3.0 (래퍼 사용, 별도 설치 불필요) |
+| Gradle | 9.5.0 (래퍼 사용, 별도 설치 불필요) |
 | IntelliJ Platform | 2024.2 (IC-242) |
 | 대상 IDE | IntelliJ IDEA 2024.2+ |
 
