@@ -58,9 +58,8 @@ intellijPlatform {
     pluginConfiguration {
         name = providers.gradleProperty("pluginName")
         version = providers.gradleProperty("pluginVersion")
-        changeNotes = providers.gradleProperty("pluginVersion").map { v ->
-            providers.gradleProperty("pluginChangeNotes").orNull
-                ?: "<b>$v</b>"
+        changeNotes = provider {
+            """See <a href="https://github.com/icemokacat/moka-ai-git-commit/releases">GitHub Releases</a> for full changelog."""
         }
         ideaVersion {
             sinceBuild = providers.gradleProperty("pluginSinceBuild")
